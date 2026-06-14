@@ -1,0 +1,5 @@
+This is taken almost entirely from
+[tabline](https://github.com/michaelbrusegard/tabline.wez) I just had to change
+from a plugin to a standard lua load. This greatly simplifies the complexity of
+integrating this plugin inside of a standalone wrapper for wezterm using the
+nix package manager.
