@@ -93,7 +93,7 @@
     saveStateDir = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
-      example = /home/pouya/sessions;
+      example = /home/username/sessions;
       description = ''
         location where session sate will be stored. By default it will be
         stored in the users home directory underneath

@@ -225,17 +225,17 @@ function M.apply_to_config(config, opts)
         },
 
         -- Workspaces
-        { key = "$", mods = "LEADER", action = M.action.RenameWorkspace,                desc = "rename workspace" },
-        { key = "w", mods = "LEADER", action = M.action.CreateWorkspace,                desc = "create workspace" },
-        { key = "s", mods = "LEADER", action = M.action.WorkspaceSelect,                desc = "select workspace" },
-        { key = "(", mods = "LEADER", action = act.SwitchWorkspaceRelative(-1),         desc = "go to previous workspace" },
-        { key = ")", mods = "LEADER", action = act.SwitchWorkspaceRelative(1),          desc = "go to next workspace" },
+        { key = "$", mods = "LEADER|SHIFT", action = M.action.RenameWorkspace,                desc = "rename workspace" },
+        { key = "w", mods = "LEADER",       action = M.action.CreateWorkspace,                desc = "create workspace" },
+        { key = "s", mods = "LEADER",       action = M.action.WorkspaceSelect,                desc = "select workspace" },
+        { key = "(", mods = "LEADER|SHIFT", action = act.SwitchWorkspaceRelative(-1),         desc = "go to previous workspace" },
+        { key = ")", mods = "LEADER|SHIFT", action = act.SwitchWorkspaceRelative(1),          desc = "go to next workspace" },
 
         -- Tabs
-        { key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain"),       desc = "create new tab" },
-        { key = "&", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }), desc = "close current tab" },
-        { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1),             desc = "go to previous tab" },
-        { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1),              desc = "go to next tab" },
+        { key = "c", mods = "LEADER",       action = act.SpawnTab("CurrentPaneDomain"),       desc = "create new tab" },
+        { key = "&", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = true }), desc = "close current tab" },
+        { key = "p", mods = "LEADER",       action = act.ActivateTabRelative(-1),             desc = "go to previous tab" },
+        { key = "n", mods = "LEADER",       action = act.ActivateTabRelative(1),              desc = "go to next tab" },
 
         -- Panes
         {
@@ -252,26 +252,26 @@ function M.apply_to_config(config, opts)
                 domain = "CurrentPaneDomain" }),
             desc = "split pane vertically"
         },
-        { key = "<", mods = "LEADER", action = act.RotatePanes("CounterClockwise"),                                    desc = "rotate panes counter clockwise" },
-        { key = ">", mods = "LEADER", action = act.RotatePanes("Clockwise"),                                           desc = "rotate pantes clockwise" },
-        { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left"),                                      desc = "activate left pane" },
-        { key = "j", mods = "LEADER", action = act.ActivatePaneDirection("Down"),                                      desc = "activate below pane" },
-        { key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up"),                                        desc = "activate above pane" },
-        { key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right"),                                     desc = "activate right pane" },
-        { key = "q", mods = "LEADER", action = act.PaneSelect({ mode = "Activate" }),                                  desc = "activate pane selector" },
-        { key = "z", mods = "LEADER", action = act.TogglePaneZoomState,                                                desc = "zoom pane" },
-        { key = "!", mods = "LEADER", action = M.action.MovePaneToNewTab,                                              desc = "move pane to new tab" },
-        { key = "x", mods = "LEADER", action = act.CloseCurrentPane({ confirm = true }),                               desc = "close current pane with confirmation" },
+        { key = "<", mods = "LEADER|SHIFT", action = act.RotatePanes("CounterClockwise"),                                    desc = "rotate panes counter clockwise" },
+        { key = ">", mods = "LEADER|SHIFT", action = act.RotatePanes("Clockwise"),                                           desc = "rotate pantes clockwise" },
+        { key = "h", mods = "LEADER",       action = act.ActivatePaneDirection("Left"),                                      desc = "activate left pane" },
+        { key = "j", mods = "LEADER",       action = act.ActivatePaneDirection("Down"),                                      desc = "activate below pane" },
+        { key = "k", mods = "LEADER",       action = act.ActivatePaneDirection("Up"),                                        desc = "activate above pane" },
+        { key = "l", mods = "LEADER",       action = act.ActivatePaneDirection("Right"),                                     desc = "activate right pane" },
+        { key = "q", mods = "LEADER",       action = act.PaneSelect({ mode = "Activate" }),                                  desc = "activate pane selector" },
+        { key = "z", mods = "LEADER",       action = act.TogglePaneZoomState,                                                desc = "zoom pane" },
+        { key = "!", mods = "LEADER",       action = M.action.MovePaneToNewTab,                                              desc = "move pane to new tab" },
+        { key = "x", mods = "LEADER",       action = act.CloseCurrentPane({ confirm = true }),                               desc = "close current pane with confirmation" },
 
-        { key = " ", mods = "LEADER", action = act.QuickSelect,                                                        desc = "activate quick select" },
+        { key = " ", mods = "LEADER",       action = act.QuickSelect,                                                        desc = "activate quick select" },
 
 
         -- Copy Mode
-        { key = "[", mods = "LEADER", action = act.ActivateCopyMode,                                                   desc = "activate copy mode" },
+        { key = "[", mods = "LEADER",       action = act.ActivateCopyMode,                                                   desc = "activate copy mode" },
 
         -- Resize modes
-        { key = "r", mods = "LEADER", action = act.ActivateKeyTable { name = 'resize_pane_mode', one_shot = false },   desc = "activate resize pane mode" },
-        { key = "R", mods = "LEADER", action = act.ActivateKeyTable { name = 'window_resize_mode', one_shot = false }, desc = "activate resize window mode" },
+        { key = "r", mods = "LEADER",       action = act.ActivateKeyTable { name = 'resize_pane_mode', one_shot = false },   desc = "activate resize pane mode" },
+        { key = "R", mods = "LEADER",       action = act.ActivateKeyTable { name = 'window_resize_mode', one_shot = false }, desc = "activate resize window mode" },
 
         -- Move tab mode
         {
@@ -327,10 +327,10 @@ function M.apply_to_config(config, opts)
             action = act.EmitEvent("fork_session"),
             desc = "fork session"
         },
-        
+
 
         -- define leader
-        { key = ",", mods = "LEADER", action = M.action.RenameCurrentTab,                                        desc = "rename current tab" },
+        { key = ",", mods = "LEADER", action = M.action.RenameCurrentTab, desc = "rename current tab" },
     }
 
     local index_offset = 1

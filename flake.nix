@@ -47,7 +47,6 @@
       flake.wrappers.wezterm = {
         imports = [ (flake-parts.lib.importApply ./wezterm/wezterm.nix { inherit inputs; }) ];
         colorScheme = "Tokyo Night";
-        saveStateDir = "/home/pouya/.local/state/wezterm/sessions";
         fontSize = 10;
       };
     };
