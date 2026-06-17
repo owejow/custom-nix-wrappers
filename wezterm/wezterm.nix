@@ -93,11 +93,10 @@
     saveStateDir = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
-      example = /home/username/sessions;
+      example = /home/johndoe/sessions;
       description = ''
         location where session sate will be stored. By default it will be
-        stored in the users home directory underneath
-        .local/share/wezterm/sessions.
+        ~/.local/share/wezterm-sessions/state/
       '';
     };
 
