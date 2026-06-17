@@ -1,10 +1,10 @@
---
+-- 
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 local nix_info = require("nix-info")
 
 -- load path and nix-info
-
+local default_save_state_dir = wezterm.home_dir .. "/" .. ".local" .. "/" .. "share" .. "/" .. "wezterm" .. "/" .. "sessions"
 local current_dir = nix_info("", "package_dir")
 package.path = package.path .. ";" .. current_dir .. "/?.lua;" .. current_dir .. "/?/init.lua"
 
@@ -21,7 +21,7 @@ local tabline = require("tabline")
 local sanitize_mode = require("tabline.components.window.mode").update
 
 config.tab_and_split_indices_are_zero_based = false;
-config.use_fancy_tab_bar = false -- need to not have fancy tab bar
+config.use_fancy_tab_bar = false     -- need to not have fancy tab bar
 
 tabline.setup({
     theme = config.color_scheme,
@@ -51,7 +51,8 @@ local sessions = require("sessions")
 package.path = package.path .. ";" .. current_dir .. "/?.lua;" .. current_dir .. "/?/init.lua"
 sessions.apply_to_config(config, {
     -- Set your custom session storage location here
-    save_state_dir = require('nix-info')(nil, "save_state_dir")
+    save_state_dir = nix_info(nil, "save_state_dir") or default_save_state_dir,
+    
     -- Other optional settings
     auto_save_interval_s = 30,
     git_branch_warn = true,
