@@ -263,7 +263,7 @@ function M.apply_to_config(config, opts)
         { key = "!", mods = "LEADER",       action = M.action.MovePaneToNewTab,                                              desc = "move pane to new tab" },
         { key = "x", mods = "LEADER",       action = act.CloseCurrentPane({ confirm = true }),                               desc = "close current pane with confirmation" },
 
-        { key = " ", mods = "LEADER",       action = act.QuickSelect,                                                        desc = "activate quick select" },
+        { key = "/", mods = "LEADER",       action = act.QuickSelect,                                                        desc = "activate quick select" },
 
 
         -- Copy Mode

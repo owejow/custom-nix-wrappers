@@ -6,6 +6,21 @@
   config,
   ...
 }:
+let
+  makeFontEnv =
+    {
+      fonts,
+      includeSystem ? true,
+    }:
+    {
+      data = "${pkgs.makeFontsConf {
+        fontDirectories = fonts;
+
+        # If includeSystem is true, pass the system file; otherwise, pass an empty list
+        includes = if includeSystem then [ "/etc/fonts/fonts.conf" ] else [ ];
+      }}";
+    };
+in
 {
   imports = [ wlib.wrapperModules.wezterm ];
   options = {
@@ -63,6 +78,7 @@
               type = lib.types.str;
               description = "The precise font family name. REQUIRED.";
             };
+            # This forces 'family' to be specified. If missing, evaluation throws an error.
             # Optional properties can fallback to default parameters automatically
             weight = lib.mkOption {
               type = lib.types.str;
@@ -77,6 +93,21 @@
           };
         }
       );
+    };
+    fontPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [
+        pkgs.doulos-sil
+        pkgs.jigmo
+        pkgs.noto-fonts-cjk-sans
+        pkgs.nerd-fonts.fira-code
+      ];
+      description = "Font packages that you want to ensur ethat the are installed" ;
+    };
+    includeSystemFonts = lib.mkOption {
+      type = lib.types.bool;
+      default = true; # Enabled by default, set to false to completely isolate
+      description = "Whether to include the host system's font configuration as a backup fallback.";
     };
     fontSize = lib.mkOption {
       type = lib.types.int;
@@ -112,7 +143,7 @@
       fonts = config.fonts;
       default_prog = lib.meta.getExe config.defaultProgram;
       save_state_dir = config.saveStateDir;
-      package_dir =  "${placeholder "out"}/lua/";
+      package_dir = "${placeholder "out"}/lua/";
     };
     "wezterm.lua".content = builtins.readFile ./wezterm.lua;
     buildCommand.copyLuaFolder = {
@@ -129,5 +160,10 @@
         cp -r ${./lua}/. "$out/lua/"
       '';
     };
+
+    env.FONTCONFIG_FILE = lib.mkIf  (config.fontPackages != []) (makeFontEnv {
+      fonts = config.fontPackages;
+      includeSystem = true;
+    });
   };
 }
