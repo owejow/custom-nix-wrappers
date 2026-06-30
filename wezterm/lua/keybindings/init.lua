@@ -333,10 +333,9 @@ function M.apply_to_config(config, opts)
         { key = ",", mods = "LEADER", action = M.action.RenameCurrentTab, desc = "rename current tab" },
     }
 
-    local index_offset = 1
-    for i = index_offset, 9 do
+    for i = 1, 9 do
         table.insert(keys,
-            { key = tostring(i), mods = "LEADER", action = act.ActivateTab(i - index_offset), desc = "Go to tab" })
+            { key = tostring(i), mods = "LEADER", action = act.ActivateTab(i - 1), desc = "Go to tab" })
     end
 
     local resize_pane_mode = {
